@@ -28,6 +28,12 @@
   <!-- what other software does our project depend on (third-party JARs, etc.) -->
   <dependencies>
 
+      <dependency>
+          <groupId>org.freemarker</groupId>
+          <artifactId>freemarker</artifactId>
+          <version>2.3.28</version>
+      </dependency>
+
     <!-- JUnit unit testing (https://junit.org/) -->    
     <dependency>
       <groupId>junit</groupId>
@@ -42,7 +48,7 @@
       <artifactId>spark-core</artifactId>
       <version>2.5</version>
     </dependency>
-    
+
   </dependencies>
 
   <!-- For use with github pages, to publish the site to the /docs subdirectory -->
@@ -93,7 +99,7 @@
             <configuration>
               <archive>
                 <manifest>
-		    <mainClass>edu.ucsb.cs56.pconrad.SparkDemo01</mainClass>
+		    <mainClass>edu.ucsb.cs56.pconrad.CatFinder</mainClass>
                 </manifest>
               </archive>
               <descriptorRefs>
@@ -117,7 +123,7 @@
 	  </execution>
 	</executions>
 	<configuration>
-	  <mainClass>edu.ucsb.cs56.pconrad.SparkDemo01</mainClass> 
+	  <mainClass>edu.ucsb.cs56.pconrad.CatFinder</mainClass>
 	</configuration>
       </plugin>
 

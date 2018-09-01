@@ -10,7 +10,7 @@ import org.junit.After;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class SparkDemo01Test {
+public class CatFinderTest {
 
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
