@@ -1,4 +1,5 @@
 # ucsb-cs56-catfinder
+Check out the running product here: https://ucsb-cs56-wilson-08-18.herokuapp.com/
 
 The simplest possible SparkJava web app (Hello World)
 
