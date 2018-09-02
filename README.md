@@ -154,7 +154,8 @@ Get the response code. If it is not 200, then that means there is an issue.
             if (responsecode != 200) { System.out.println("oh no");}
 ```
 Now that we are connected, we want to read in the data provided by the API. Here we will do this with a Scanner.
-Build a String with the data. We can use this string to form our JSONObject. 
+Build a String with the data. We can use this string to form our JSONObject. If we simply do System.out.println(inline), we will get the tree shown earlier.
+
 ```
             Scanner sc = new Scanner(url.openStream());
             String inline = "";
