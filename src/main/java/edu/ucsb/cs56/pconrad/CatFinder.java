@@ -25,8 +25,6 @@ import static spark.Spark.port;
 /*
     This WebApp uses Spark.Java framework and FreeMarker Template engine.
     The API is from RescueGroups.org.
-
-    TODO: There is bug where when page is refreshed, the does not refresh and grows instead.
  */
 
 public class CatFinder {
@@ -61,6 +59,7 @@ public class CatFinder {
 
         // Page for list of cats
         get("/results", (req, res) -> {
+            cats.clear();
 
             StringWriter writer = new StringWriter();
             try {
