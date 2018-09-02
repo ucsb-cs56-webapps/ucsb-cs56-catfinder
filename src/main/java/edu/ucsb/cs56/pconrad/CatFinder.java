@@ -25,6 +25,7 @@ import static spark.Spark.port;
 /*
     This WebApp uses Spark.Java framework and FreeMarker Template engine.
     The API is from RescueGroups.org.
+    TODO: Tinker with amount of cats retrieved. Create a nav bar. Make a way for users to input zipcode.
  */
 
 public class CatFinder {

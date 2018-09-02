@@ -8,15 +8,15 @@
 
     <!-- project coordinates - values which uniquely identify this project -->
 
-  <groupId>edu.ucsb.cs56.pconrad</groupId>
-    <artifactId>sparkjava-demo-01</artifactId>
-  <version>1.0</version>
-  <url>https://ucsb-cs56-webapps.github.io/ucsb-cs56-catfinder/</url>
+    <groupId>edu.ucsb.cs56.pconrad</groupId>
+    <artifactId>ucsb-cs56-wilson-08-18</artifactId>
+    <version>1.0</version>
+    <url>https://ucsb-cs56-pconrad.github.io/sparkjava-01</url>
   
   <!-- configure what mvn package produces -->
-  
-  <packaging>jar</packaging>
-  <name>sparkjava-demo-01</name>
+
+    <packaging>jar</packaging>
+    <name>ucsb-cs56-wilson-08-18</name>
   
   <!-- what version of Java should we use and what encoding for files? -->
   <properties>
@@ -149,7 +149,7 @@
           <processTypes>
             <!-- Tell Heroku how to launch your application -->
             <!-- You might have to remove the ./ in front   -->
-            <web>java $JAVA_OPTS -jar target/sparkjava-demo-01-1.0-jar-with-dependencies.jar</web>
+            <web>java $JAVA_OPTS -jar target/ucsb-cs56-wilson-08-18-1.0-jar-with-dependencies.jar</web>
           </processTypes>
 	</configuration>
       </plugin>
