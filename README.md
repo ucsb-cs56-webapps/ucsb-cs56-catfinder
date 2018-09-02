@@ -24,7 +24,7 @@ JSON provides data to calling functions in key-value pairs, where key is the nam
 There are two structured types in JSON, objects and arrays. An object is unordered and has zero or more key-value pairs, whereas an array is ordered and has zero or more values. The values can be strings, numbers, booleans, null, or even these two structured types.
 
 6. What is a RestAPI?  
-A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data.
+A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data. Basically when users visit a website, they receive and send JSON files using the RestAPI to allow connections and interactions with cloud services. 
 
 # Using a RestAPI to retrieve JSON and load into our model
 
