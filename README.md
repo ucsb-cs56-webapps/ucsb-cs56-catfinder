@@ -25,22 +25,21 @@ There are two structured types in JSON, objects and arrays. An object is unorder
 
 # Using a RestAPI to retrieve JSON and load into our model
 
-The API being used here is from PetFinder. It will be used to retrieve a JSON containing a list of cats. 
+We base our app on the API provided by PetFinder, which is also a RESTful API. It will be used to retrieve a JSON containing a list of cats. 
 Documentation for this API can be found here: https://www.petfinder.com/developers/api-docs.
 
-For GET calls, the format of the url is like this:
+To read data, we will use GET calls, which has the following format:
 ```
 http://api.petfinder.com/my.method?key=12345&arg1=foo
 ```
-The method used here will be pet.find. The required parameters are "key" and "location". We want our response to be in JSON,
-so we will also pass that argument and our query will look like the following:
+In our case, we need to use pet.find, where the required parameters are "key" and "location". We want our response to be in JSON, so we will also pass that argument and our query will look like the following:
 
 ```
 http://api.petfinder.com/pet.find?key=" + key + "&animal=cat&location=93117&format=json
 ```
 
-Here is the JSON tree returned from the API. I removed a lot of irrelevant fields for simplicity.
-However, the paths to the data we want are the same in my edited version and the actual. I would recommend using a tool such as Insomnia to see what our query will return.
+Here is the JSON tree returned from the API. A lot of irrelevant fields are removed for simplicity.
+However, the paths to the data we want are the same in the edited version and the actual. I would recommend using a tool such as Insomnia to see what our query will return.
 
 ```
 {
