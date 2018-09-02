@@ -23,6 +23,9 @@ JSON provides data to calling functions in key-value pairs, where key is the nam
 5. How are the key value pairs stored?  
 There are two structured types in JSON, objects and arrays. An object is unordered and has zero or more key-value pairs, whereas an array is ordered and has zero or more values. The values can be strings, numbers, booleans, null, or even these two structured types.
 
+6. What is a RestAPI?  
+A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data.
+
 # Using a RestAPI to retrieve JSON and load into our model
 
 We base our app on the API provided by PetFinder, which is also a RESTful API. It will be used to retrieve a JSON containing a list of cats. 
