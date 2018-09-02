@@ -9,18 +9,23 @@ The simplest possible SparkJava web app (Hello World)
 # Basics of JSON
 
 1. What does it stand for? 
+
 JSON - JavaScript Object Notation.
 
 2. What is it?
+
 A data interchange format that gathers and shares data among applications and interfaces.
 
 3. Why JSON?
+
 It is a text-based, language-independent data exchange format that is easy for human to read.
 
 4. What does it look like?
+
 JSON provides data to calling functions in key-value pairs, where key is the name of the variable and value is its corresponding value. 
 
 5. How are the key value pairs stored?
+
 There are two structured types in JSON, objects and arrays. An object is unordered and has zero or more key-value pairs, whereas an array is ordered and has zero or more values. The values can be strings, numbers, booleans, null, or even these two structured types.
 
 # Using a RestAPI to retrieve JSON and load into our model
