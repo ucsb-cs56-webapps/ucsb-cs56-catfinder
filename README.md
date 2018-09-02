@@ -8,6 +8,8 @@ The simplest possible SparkJava web app (Hello World)
 
 # Basics of JSON
 
+Let's start with some simple questions.
+
 1. What does it stand for?  
 JSON - JavaScript Object Notation.
 
@@ -25,6 +27,8 @@ There are two structured types in JSON, objects and arrays. An object is unorder
 
 6. What is a RestAPI?  
 A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data. Basically when users visit a website, they receive and send JSON files using the RestAPI to allow connections and interactions with cloud services. 
+
+
 
 # Using a RestAPI to retrieve JSON and load into our model
 
