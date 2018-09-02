@@ -26,22 +26,21 @@ There are two structured types in JSON, objects and arrays. An object is unorder
 # Using a RestAPI to retrieve JSON and load into our model
 
 The API being used here is from PetFinder. It will be used to retrieve a JSON containing a list of cats. 
-Documentation for this API can be found here: https://www.petfinder.com/developers/api-docs
+Documentation for this API can be found here: https://www.petfinder.com/developers/api-docs.
 
 For GET calls, the format of the url is like this:
 ```
 http://api.petfinder.com/my.method?key=12345&arg1=foo
 ```
-The method used here will be pet.find. The required parameters are a 'key' and location. We want our response to be in JSON,
-so we will also pass that argument. So our query will be like this:
+The method used here will be pet.find. The required parameters are "key" and "location". We want our response to be in JSON,
+so we will also pass that argument and our query will look like the following:
 
 ```
 http://api.petfinder.com/pet.find?key=" + key + "&animal=cat&location=93117&format=json
 ```
 
-Here is what the JSON returned from the API will look like. I have removed a lot of irrelevant fields for simplicity.
-However, the paths to the data we want is the same in my edited version and the actual. I would recommend using a tool like
-Insomnia to see what our query will return.
+Here is the JSON tree returned from the API. I removed a lot of irrelevant fields for simplicity.
+However, the paths to the data we want are the same in my edited version and the actual. I would recommend using a tool such as Insomnia to see what our query will return.
 
 ```
 {
@@ -99,7 +98,7 @@ Insomnia to see what our query will return.
 }
 ```
 
-Our model representing each cat will be defined in PetModel.java. There will be default values in case the API does not provide some data.
+Our model representing each cat will be defined in PetModel.java. There will be default values in case some data are missing from the API.
 
 ```
 public class PetModel {
@@ -125,15 +124,15 @@ In our main, we can use an Arraylist to store all of our created PetModels.
 
 ```
 
-So lets really start.. For this short guide, everything will be done within here:
+So let's really start! In this short guide, everything will be done within here:
 
 ```
 get("/sample", (req, res) -> { we will do everything in here }
 
 ```
 For details on config var values, refer to:
-https://devcenter.heroku.com/articles/config-vars
-Store your key in a .env file and be sure to ignore that from git.
+https://devcenter.heroku.com/articles/config-vars.
+Store your key in an .env file and be sure to ignore that from git.
 If you don't want to deal with that yet, just replace 'key' with your API key. (bad practice makes perfect)
 ```
             String key = System.getenv("PETFINDER_KEY");
@@ -163,13 +162,13 @@ Build a String with the data. We can use this string to form our JSONObject.
             sc.close();
 ```
 
-We want to store every pet into a PetModel. Note the layout of the JSON file retrieved from the API.
-Each pet in the array of pets can be made into a JSONObject. Then each field in that can also be made into
-a JSONObject. For each JSONObject, .get("<field>") can be called to retrieve its value or JSONObject.
-Calling .toString() on a JSON Object will return the string of its values.
+We will then store every pet in the JSON file as a PetModel by following the steps below:
 
-Watch out for fields that can be empty. Trying to create an object from it will cause an error. Avoid this by checking
-if the length of the object is 0.
+1. Create a new JSONObject from the string read by the scanner.  
+2. For each JSONObject, "<JSONObject>".get("<field>") can be called to retrieve the corresponding value. In our case, make each pet in the array of pets into a JSONObject and cast each field in pet to a JSONObject. Notice that some fields in the JSON tree have brackets instead of curly brackets, which means they need to be casted to a JSONArray instead of a JSONObject.  
+3. After getting to the innermost layer, we call .toString() on the JSON Object to return the string of its values.
+
+Watch out for fields that can be empty. Trying to create an object from it will cause an error, which can be avoided by checking if the length of the object is 0.
 
 The idea here is to iterate through the JSON array of pets. Parse the data from each pet, store it in a 
 PetModel, and then add it to an ArrayList of PetModels.
