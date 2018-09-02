@@ -225,8 +225,7 @@ We can iterate through our list of PetModels to check if things are working.
 
 # Using Freemarker as a template engine
 
-With a template engine, a template can be thought of as a 'view' in the Model-View-Controller design pattern. It is essentially a layout with parameters.
-Here is how to start using FreeMarker.
+With a template engine, a template can be thought of as a 'view' in the Model-View-Controller design pattern. It is essentially a layout with parameters. Here is how to start using FreeMarker.
 
 In your pom.xml, include Freemarker as a dependency:
 
@@ -239,19 +238,18 @@ In your pom.xml, include Freemarker as a dependency:
        
 ```
 
-Create a layout file in your jar. Freemarker uses .ftl files. It will be like html. Values can be inserted with ${id}. For example:
+Create a layout file in your jar. Freemarker uses .ftl files that are similar to html. Values can be inserted with ${id}. For example:
 
 ```
 <html>
 <head>
-    <title>${title_value}/title>
+    <title>${title_value}</title>
 </head>
 <body></body>
 </html>
 ```
 
-Now, set up a Configuration instance. In this example, a layouts folder is adjacent to the class file. 
-The templates will be loaded from the layouts folder under resources. A template named "home.ftl" is used.
+Now, set up a Configuration instance at the beginning of the Java file. In this example, a layouts folder is located at /src/main/resources/layouts/, where the templates will be loaded. A template named "home.ftl" is used.
 
 ```
     Configuration cfg = new Configuration(Configuration.VERSION_2_3_26);
@@ -264,9 +262,9 @@ To insert values into the template:
 ```
 get("/", (Request req, Response res) -> {
             StringWriter writer = new StringWriter();
+            try {
             Map attributes = new HashMap();
             attributes.put("title_value", "This is the home page");
-            try {
                 Template homeTemplate = cfg.getTemplate("home.ftl");
                 homeTemplate.process(attributes, writer);
             } catch (Exception e) {
@@ -290,7 +288,7 @@ Using lists is a little trickier. In your .ftl file, add something like this:
 </#list>
 ```
 
-Note that the PetModel should resemble this:
+We shall define a separate class called PetModel in the same folder as below.
 ```
 public class PetModel {
     public String name = "";
@@ -310,10 +308,8 @@ public class PetModel {
 }
 ```
 
-Each member should have a getter. The variable name should correlate to the label in your ftl.
-In the attributes, the 'cats' within your template file should be mapped to an ArrayList of PetModels.
-In the code below, cats is an ArrayList of PetModels. Processing the template will do all the mapping
-of each PetModel member variable to its place in the template.
+Each member should have a getter. The variable names should correlate to the labels in your ftl.
+In the attributes, the 'cats' within your template file should be mapped to an ArrayList of PetModels. Processing the template will do all the mapping of each PetModel member variable to its place in the template.
 
 ```
 get("/results", (req, res) -> {
@@ -321,7 +317,6 @@ get("/results", (req, res) -> {
             StringWriter writer = new StringWriter();
             try {
                 Map<String, Object> attributes = new HashMap<>();
-
                 attributes.put("cats", cats);
                 Template resultsTemplate = cfg.getTemplate("results.ftl");
                 resultsTemplate.process(attributes, writer);
