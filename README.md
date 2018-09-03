@@ -28,8 +28,63 @@ There are two structured types in JSON, objects and arrays. An object is unorder
 6. What is a RestAPI?  
 A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data. Basically when users visit a website, they receive and send JSON files using the RestAPI to allow connections and interactions with cloud services. 
 
+Now, we should get into more details. To process JSON files, we will need JSON.simple, which provides reading and writing to JSON streams. Notice that it cannot be replaced with org.json as the latter library doesn't offer streaming support.
 
-
+After importing the necessary packages with the line below,
+```
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+```
+we will proceed to write a simple JSON file with Java and create a list for the Class of 2020 as an example. The first thing to do is to create a general JSONObject.
+```
+JSONObject class_of_2020 = new JSONObject();
+```
+We can add a student to class_of_2020 by creating another JSONObject and put in a few pieces of information.
+```
+JSONObject yang = new JSONObject();
+yang.put("first_name", "Gaucho");
+yang.put("last_name", "Yang");
+yang.put("age", 20);
+```
+In addition to simple key-value pairs, we can also add an array of classes taken and their corresponding grades. Because we need to put two key-value pairs for each course, we might just create a LinkedHashMap instead. Be careful that JSONArray uses add, whereas JSONObject uses put.
+```
+JSONArray courses_taken = new JSONArray();
+m = new LinkedHashMap(2);
+m.put("name", "cs56");
+m.put("grade", "A");
+courses_taken.add(m);
+m = new LinkedHashMap(2);
+m.put("name", "cs48");
+m.put("grade", "A-");
+courses_taken.add(m);
+yang.put("courses", courses_taken);
+class_of_2020.put("Gaucho Yang", yang);
+```
+Finally, we save it into a JSON file.
+```
+PrintWriter pw = new PrintWriter("ClassOf2020.json");
+pw.write(class_of_2020.toJSONString());
+pw.flush();
+pw.close();
+```
+The results are shown below.
+```
+{
+    "Gaucho Yang":{
+        "first_name":"Gaucho",
+         "last_name":"Yang",
+         "age":"20",
+	 "courses":[
+		 {
+	 	"name":"cs56", "grade":"A"
+	 	},
+		 {
+		 "name":"cs48", "grade":"A-"
+	 	}
+	 ]
+    }
+}
+```
 # Using a RestAPI to retrieve JSON and load into our model
 
 We base our app on the API provided by PetFinder, which is also a RESTful API. It will be used to retrieve a JSON containing a list of cats. 
