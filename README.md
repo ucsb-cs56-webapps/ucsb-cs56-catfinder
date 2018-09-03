@@ -85,9 +85,35 @@ The results are shown below. Notice that since JSONObject is unordered, the outp
     }
 }
 ```
+Now, we will look into reading from a JSON file. In addition to the two packages we imported before, a third one is required.
+```
+import org.json.simple.parser.*;
+```
+We create a JSONParser with the name of the desired file and cast the result to a JSONObject. 
+```
+Object obj = new JSONParser().parse(new FileReader("ClassOf2020.json"));
+JSONObject class_of_2020 = (JSONObject) obj;
+```
 
-# Using a RestAPI to retrieve JSON and load into our model
+For simple key-value pairs such as first_name, we can simply use the get function and cast the output.
+```
+JSONObject yang = (JSONObject) class_of_2020.get("Gaucho Yang");
+String firstName = (String) yang.get("first_name");
+```
+For the list of courses, we will need one iterator for the JSONArray and a second iterator for the LinkedHashMap.
+```
+JSONArray courses = (JSONArray) yang.get("courses");
+Iterator itr1 = courses.iterator();
+while (itr1.hasNext()){
+	iterator<Map.Entry> itr2 = ((Map) itr1.next()).entrySet().iterator();
+        while (itr1.hasNext()) {
+             Map.Entry pair = itr2.next();
+             System.out.println(pair.getKey() + " : " + pair.getValue());
+        }
+}         
+```
 
+#Using a RestAPI to retrieve JSON and load into our model
 We base our app on the API provided by PetFinder, which is also a RESTful API. It will be used to retrieve a JSON containing a list of cats. 
 Documentation for this API can be found here: https://www.petfinder.com/developers/api-docs.
 
