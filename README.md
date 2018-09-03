@@ -112,8 +112,8 @@ while (itr1.hasNext()){
         }
 }         
 ```
+# Using a RestAPI to retrieve JSON and load into our model
 
-#Using a RestAPI to retrieve JSON and load into our model
 We base our app on the API provided by PetFinder, which is also a RESTful API. It will be used to retrieve a JSON containing a list of cats. 
 Documentation for this API can be found here: https://www.petfinder.com/developers/api-docs.
 
