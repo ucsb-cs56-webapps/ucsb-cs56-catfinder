@@ -67,24 +67,25 @@ pw.write(class_of_2020.toJSONString());
 pw.flush();
 pw.close();
 ```
-The results are shown below.
+The results are shown below. Notice that since JSONObject is unordered, the output shown here doesn't perserve the order we input.
 ```
 {
     "Gaucho Yang":{
+        "age":"20",
         "first_name":"Gaucho",
-         "last_name":"Yang",
-         "age":"20",
-	 "courses":[
+	"courses":[
 		 {
 	 	"name":"cs56", "grade":"A"
 	 	},
 		 {
 		 "name":"cs48", "grade":"A-"
 	 	}
-	 ]
+	 ],
+        "last_name":"Yang"
     }
 }
 ```
+
 # Using a RestAPI to retrieve JSON and load into our model
 
 We base our app on the API provided by PetFinder, which is also a RESTful API. It will be used to retrieve a JSON containing a list of cats. 
