@@ -5,8 +5,8 @@
             margin: 5px;
             border: 1px solid #ccc;
             float: left;
-            width: 300px;
-            height: 400px;
+            width: 450px;
+            height: 600px;
             overflow-y: scroll;
         }
 
@@ -32,6 +32,17 @@
 
 <br>
 <h1 style="font-size: 300%; color: papayawhip; text-align: center">Results</h1>
+
+<!--h2 style="text-align: center">some shelters or rescue nearby</h2> -->
+
+<!--
+<div>
+    <iframe width="450" height="450" frameborder="0" style="border:0; float:middle"
+     src="https://www.google.com/maps/embed/v1/search?key= { }&q=cat%20adoption%20in%20  {map_zipcode}" allowfullscreen></iframe>
+</div>
+
+<br>
+-->
 
 <#list cats as cat>
     <div class="gallery">

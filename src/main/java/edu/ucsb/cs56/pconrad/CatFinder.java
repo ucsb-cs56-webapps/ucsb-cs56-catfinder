@@ -4,16 +4,13 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.json.JSONArray;
 import spark.*;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.*;
-
 import org.json.JSONObject;
-
 import static spark.Spark.get;
 import static spark.Spark.port;
 
@@ -26,6 +23,8 @@ import static spark.Spark.port;
     This WebApp uses Spark.Java framework and FreeMarker Template engine.
     The API is from RescueGroups.org.
     TODO: Tinker with amount of cats retrieved. Create a nav bar. Make a way for users to input zipcode.
+    TODO: Remove absurdly big base64 string from home file
+    TODO: Update ReadME for API instructions with Https URLs
  */
 
 public class CatFinder {
@@ -44,6 +43,7 @@ public class CatFinder {
 
         // Home page
         get("/", (Request req, Response res) -> {
+
             StringWriter writer = new StringWriter();
             Map attributes = new HashMap();
             attributes.put("home_banner", "Lets find a cat.");
@@ -64,12 +64,12 @@ public class CatFinder {
 
             StringWriter writer = new StringWriter();
             try {
+                //String key = System.getenv("GOOGLE_MAPS_API_KEY");
                 Map<String, Object> attributes = new HashMap<>();
+                //attributes.put("google_key", key);
+                //System.out.println("gkey: "+key);
+                //attributes.put("map_zipcode", 93117);
                 buildCatsList(93117, cats);
-
-                for (PetModel cat : cats) {
-                    //System.out.println("cat.name: " + cat.name);
-                }
 
                 attributes.put("cats", cats);
                 Template resultsTemplate = cfg.getTemplate("results.ftl");
@@ -90,6 +90,8 @@ public class CatFinder {
             // Store your key in a .env file and be sure to ignore that from git.
             String key = System.getenv("PETFINDER_KEY");
             String urlString = "http://api.petfinder.com/pet.find?key=" + key + "&animal=cat&location=93117&format=json";
+
+            System.out.println(urlString);
 
             // Create a URL with the url formed.
             URL url = new URL(urlString);
@@ -234,7 +236,6 @@ public class CatFinder {
         while (sc.hasNext()) {
             inline += sc.nextLine();
         }
-        //System.out.println(“\nJSON data in string format”);
         sc.close();
 
         JSONObject json = new JSONObject(inline);
