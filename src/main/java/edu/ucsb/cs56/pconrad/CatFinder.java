@@ -9,22 +9,27 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import org.json.JSONObject;
-import static spark.Spark.get;
-import static spark.Spark.port;
+
+import static spark.Spark.*;
 
 
-/**
- * Hello world!
- */
 
 /*
     This WebApp uses Spark.Java framework and FreeMarker Template engine.
     The API is from RescueGroups.org.
-    TODO: Tinker with amount of cats retrieved. Create a nav bar. Make a way for users to input zipcode.
-    TODO: Remove absurdly big base64 string from home file
-    TODO: Update ReadME for API instructions with Https URLs
+
+    TODO: Handle case where zipcode is invalid
+    TODO: Move CSS out of template files and into a new css file.
+    TODO: Load more than 25 cats. Have several pages of cats.
+    TODO: Show more information about the cats: location, shelter, etc.
+    TODO: Make a Google Map showing all nearby shelters from zipcode entered.
+    TODO: Have a "use current location" option apart from entering zipcode.
+    TODO: Get favicon image to work.
+
  */
 
 public class CatFinder {
@@ -41,12 +46,25 @@ public class CatFinder {
         cfg.setClassForTemplateLoading(CatFinder.class, "/layouts/");
         cfg.setDefaultEncoding("UTF-8");
 
+        staticFiles.location("/static");
+
+
+        // zipcode that will be used to populate results page
+        //int zipCode;
+
         // Home page
         get("/", (Request req, Response res) -> {
 
             StringWriter writer = new StringWriter();
             Map attributes = new HashMap();
             attributes.put("home_banner", "Lets find a cat.");
+
+            String path = "static/home_bg.jpg";
+            Path p = Paths.get(path);
+            String pString = p.toString();
+
+            attributes.put("image_path", pString);
+
             try {
                 Template homeTemplate = cfg.getTemplate("home.ftl");
                 homeTemplate.process(attributes, writer);
@@ -58,30 +76,6 @@ public class CatFinder {
             return writer;
         });
 
-        // Page for list of cats
-        get("/results", (req, res) -> {
-            cats.clear();
-
-            StringWriter writer = new StringWriter();
-            try {
-                //String key = System.getenv("GOOGLE_MAPS_API_KEY");
-                Map<String, Object> attributes = new HashMap<>();
-                //attributes.put("google_key", key);
-                //System.out.println("gkey: "+key);
-                //attributes.put("map_zipcode", 93117);
-                buildCatsList(93117, cats);
-
-                attributes.put("cats", cats);
-                Template resultsTemplate = cfg.getTemplate("results.ftl");
-                resultsTemplate.process(attributes, writer);
-            } catch (Exception e) {
-                System.out.println(e);
-                System.out.println("results.ftl not found!");
-                Spark.halt(500);
-            }
-            return writer;
-
-        });
 
         // a sample to demo API
         ArrayList<PetModel> pets = new ArrayList<>();
@@ -164,6 +158,29 @@ public class CatFinder {
             }
 
             return "";
+        });
+
+        post("/", (req, res) -> {
+            //System.out.println(req.body());
+            int zipCode = Integer.parseInt(req.queryParams("zipcode"));
+            cats.clear();
+            buildCatsList(zipCode, cats);
+            System.out.println("zipcode entered is: " + zipCode);
+
+            StringWriter writer = new StringWriter();
+            try {
+                Map<String, Object> attributes = new HashMap<>();
+                attributes.put("cats", cats);
+                Template resultsTemplate = cfg.getTemplate("results.ftl");
+                resultsTemplate.process(attributes, writer);
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("results.ftl not found!");
+                Spark.halt(500);
+            }
+            return writer;
+
+
         });
 
 

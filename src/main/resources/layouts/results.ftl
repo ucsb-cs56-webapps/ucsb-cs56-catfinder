@@ -46,7 +46,7 @@
 
 <#list cats as cat>
     <div class="gallery">
-        <img src=${cat.img} alt="https://i.pinimg.com/originals/58/9e/17/589e1715812b7b8b903abf8463bcab81.png" width="300" height="200">
+        <img src=${cat.img} alt="/images/not_found_image.png" width="300" height="200">
          <h3 style="text-align: center">${cat.name}</h3>
          <div class="desc">${cat.description}</div>
     </div>
